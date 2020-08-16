@@ -32,6 +32,13 @@
 
 #include <vector>
 
+enum class CreditsPages {
+	Translators,
+	UniversalTeam,
+	ScriptCreators,
+	SpecialThanks
+};
+
 class Credits : public Screen {
 public:
 	void Draw(void) const override;

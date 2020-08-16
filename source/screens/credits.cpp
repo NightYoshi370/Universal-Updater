@@ -120,54 +120,59 @@ void Credits::DrawBottom(void) const {
 	std::string line2;
 
 	GFX::DrawBottom();
-	if (creditsPage == 0) {
-		Gui::DrawStringCentered(0, -2, 0.7f, config->textColor(), Lang::get("TRANSLATORS"), 320);
-		for(int i = 0; i < ENTRIES_PER_SCREEN && i < (int)Translators.size(); i++) {
-			Gui::Draw_Rect(0, 40+(i*57), 320, 45, config->unselectedColor());
-			line1 = Translators[screenPos + i];
-			line2 = Languages[screenPos + i];
-			if (screenPos + i == Selection) {
-				Gui::drawAnimatedSelector(0, 40+(i*57), 320, 45, .060, TRANSPARENT, config->selectedColor());
+	switch (creditsPage) {
+		case CreditsPages::Translators:
+			Gui::DrawStringCentered(0, -2, 0.7f, config->textColor(), Lang::get("TRANSLATORS"), 320);
+			for(int i = 0; i < ENTRIES_PER_SCREEN && i < (int)Translators.size(); i++) {
+				Gui::Draw_Rect(0, 40+(i*57), 320, 45, config->unselectedColor());
+				line1 = Translators[screenPos + i];
+				line2 = Languages[screenPos + i];
+				if (screenPos + i == Selection) {
+					Gui::drawAnimatedSelector(0, 40+(i*57), 320, 45, .060, TRANSPARENT, config->selectedColor());
+				}
+				Gui::DrawStringCentered(0, 38+(i*57), 0.7f, config->textColor(), line1, 320);
+				Gui::DrawStringCentered(0, 62+(i*57), 0.7f, config->textColor(), line2, 320);
 			}
-			Gui::DrawStringCentered(0, 38+(i*57), 0.7f, config->textColor(), line1, 320);
-			Gui::DrawStringCentered(0, 62+(i*57), 0.7f, config->textColor(), line2, 320);
-		}
-	} else if (creditsPage == 1) {
-		Gui::DrawStringCentered(0, -2, 0.7f, config->textColor(), "Universal-Team", 320);
-		for(int i = 0; i < ENTRIES_PER_SCREEN && i < (int)UniversalTeam.size(); i++) {
-			Gui::Draw_Rect(0, 40+(i*57), 320, 45, config->unselectedColor());
-			line1 = UniversalTeam[screenPos + i];
-			if (screenPos + i == Selection) {
-				Gui::drawAnimatedSelector(0, 40+(i*57), 320, 45, .060, TRANSPARENT, config->selectedColor());
+			break;
+		case CreditsPages::UniversalTeam:
+			Gui::DrawStringCentered(0, -2, 0.7f, config->textColor(), "Universal-Team", 320);
+			for(int i = 0; i < ENTRIES_PER_SCREEN && i < (int)UniversalTeam.size(); i++) {
+				Gui::Draw_Rect(0, 40+(i*57), 320, 45, config->unselectedColor());
+				line1 = UniversalTeam[screenPos + i];
+				if (screenPos + i == Selection) {
+					Gui::drawAnimatedSelector(0, 40+(i*57), 320, 45, .060, TRANSPARENT, config->selectedColor());
+				}
+				Gui::DrawStringCentered(0, 50+(i*57), 0.7f, config->textColor(), line1, 320);
 			}
-			Gui::DrawStringCentered(0, 50+(i*57), 0.7f, config->textColor(), line1, 320);
-		}
-	} else if (creditsPage == 2) {
-		Gui::DrawStringCentered(0, -2, 0.7f, config->textColor(), Lang::get("SCRIPTCREATORS"), 320);
-		for(int i = 0; i < ENTRIES_PER_SCREEN && i < (int)ScriptCreators.size(); i++) {
-			Gui::Draw_Rect(0, 40+(i*57), 320, 45, config->unselectedColor());
-			line1 = ScriptCreators[screenPos + i];
-			line2 = ScriptAmount[screenPos + i];
-			if (screenPos + i == Selection) {
-				Gui::drawAnimatedSelector(0, 40+(i*57), 320, 45, .060, TRANSPARENT, config->selectedColor());
+			break;
+		case CreditsPages::ScriptCreators:
+			Gui::DrawStringCentered(0, -2, 0.7f, config->textColor(), Lang::get("SCRIPTCREATORS"), 320);
+			for(int i = 0; i < ENTRIES_PER_SCREEN && i < (int)ScriptCreators.size(); i++) {
+				Gui::Draw_Rect(0, 40+(i*57), 320, 45, config->unselectedColor());
+				line1 = ScriptCreators[screenPos + i];
+				line2 = ScriptAmount[screenPos + i];
+				if (screenPos + i == Selection) {
+					Gui::drawAnimatedSelector(0, 40+(i*57), 320, 45, .060, TRANSPARENT, config->selectedColor());
+				}
+				Gui::DrawStringCentered(0, 38+(i*57), 0.7f, config->textColor(), line1, 320);
+				Gui::DrawStringCentered(0, 62+(i*57), 0.7f, config->textColor(), line2, 320);
 			}
-			Gui::DrawStringCentered(0, 38+(i*57), 0.7f, config->textColor(), line1, 320);
-			Gui::DrawStringCentered(0, 62+(i*57), 0.7f, config->textColor(), line2, 320);
-		}
-	} else if (creditsPage == 3) {
-		Gui::DrawStringCentered(0, -2, 0.7f, config->textColor(), "Special Thanks", 320);
-		for(int i = 0; i < ENTRIES_PER_SCREEN && i < (int)specialNames.size(); i++) {
-			Gui::Draw_Rect(0, 40+(i*57), 320, 45, config->unselectedColor());
-			line1 = specialNames[screenPos + i];
-			line2 = specialDescriptions[screenPos + i];
-			if (screenPos + i == Selection) {
-				Gui::drawAnimatedSelector(0, 40+(i*57), 320, 45, .060, TRANSPARENT, config->selectedColor());
+			break;
+		case CreditsPages::SpecialThanks:
+			Gui::DrawStringCentered(0, -2, 0.7f, config->textColor(), "Special Thanks", 320);
+			for(int i = 0; i < ENTRIES_PER_SCREEN && i < (int)specialNames.size(); i++) {
+				Gui::Draw_Rect(0, 40+(i*57), 320, 45, config->unselectedColor());
+				line1 = specialNames[screenPos + i];
+				line2 = specialDescriptions[screenPos + i];
+				if (screenPos + i == Selection) {
+					Gui::drawAnimatedSelector(0, 40+(i*57), 320, 45, .060, TRANSPARENT, config->selectedColor());
+				}
+				Gui::DrawStringCentered(0, 38+(i*57), 0.7f, config->textColor(), line1, 320);
+				Gui::DrawStringCentered(0, 62+(i*57), 0.7f, config->textColor(), line2, 320);
 			}
-			Gui::DrawStringCentered(0, 38+(i*57), 0.7f, config->textColor(), line1, 320);
-			Gui::DrawStringCentered(0, 62+(i*57), 0.7f, config->textColor(), line2, 320);
-		}
-	} else {
-		Gui::DrawStringCentered(0, -2, 0.55f, config->textColor(), Lang::get("LINK"), 320);
+			break;
+		default:
+			Gui::DrawStringCentered(0, -2, 0.55f, config->textColor(), Lang::get("LINK"), 320);
 	}
 }
 
@@ -175,61 +180,37 @@ void Credits::DrawBottom(void) const {
 void Credits::Logic(u32 hDown, u32 hHeld, touchPosition touch) {
 	if (keyRepeatDelay)	keyRepeatDelay--;
 	// KEY_DOWN Logic. (SIZE)
-	if (creditsPage == 0) {
-		if ((hHeld & KEY_DOWN && !keyRepeatDelay)) {
-			if (Selection < (int)Translators.size()-1) {
-				Selection++;
-			} else {
-				Selection = 0;
-			}
+	int maxSize;
+	switch (creditsPage) {
+		case CreditsPages::Translators:
+			maxSize = (int)Translators.size()-1;
+			break;
+		case CreditsPages::UniversalTeam:
+			maxSize = (int)UniversalTeam.size()-1;
+			break;
+		case CreditsPages::ScriptCreators:
+			maxSize = (int)ScriptCreators.size()-1;
+			break;
+		case CreditsPages::SpecialThanks:
+			maxSize = (int)specialNames.size()-1;
+			break;
+	}
 
-			keyRepeatDelay = config->keyDelay();
+	if ((hHeld & KEY_DOWN && !keyRepeatDelay)) {
+		if (Selection < maxSize) {
+			Selection++;
+		} else {
+			Selection = 0;
 		}
-	} else if (creditsPage == 1) {
-		if ((hHeld & KEY_DOWN && !keyRepeatDelay)) {
-			if (Selection < (int)UniversalTeam.size()-1) {
-				Selection++;
-			} else {
-				Selection = 0;
-			}
 
-			keyRepeatDelay = config->keyDelay();
-		}
-	} else if (creditsPage == 2) {
-		if ((hHeld & KEY_DOWN && !keyRepeatDelay)) {
-			if (Selection < (int)ScriptCreators.size()-1) {
-				Selection++;
-			} else {
-				Selection = 0;
-			}
-
-			keyRepeatDelay = config->keyDelay();
-		}
-	} else if (creditsPage == 3) {
-		if ((hHeld & KEY_DOWN && !keyRepeatDelay)) {
-			if (Selection < (int)specialNames.size()-1) {
-				Selection++;
-			} else {
-				Selection = 0;
-			}
-
-			keyRepeatDelay = config->keyDelay();
-		}
+		keyRepeatDelay = config->keyDelay();
 	}
 
 	if ((hHeld & KEY_UP && !keyRepeatDelay)) {
 		if (Selection > 0) {
 			Selection--;
 		} else {
-			if (creditsPage == 0) {
-				Selection = (int)Translators.size()-1;
-			} else if (creditsPage == 1) {
-				Selection = (int)UniversalTeam.size()-1;
-			} else if (creditsPage == 2) {
-				Selection = (int)ScriptCreators.size()-1;
-			} else if (creditsPage == 3) {
-				Selection = (int)specialNames.size()-1;
-			}
+			Selection = maxSize;
 		}
 
 		keyRepeatDelay = config->keyDelay();

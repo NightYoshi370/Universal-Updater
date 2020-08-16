@@ -41,11 +41,7 @@ std::string Input::setkbdString(uint maxLength, std::string Text) {
 	SwkbdButton ret = swkbdInputText(&state, temp, sizeof(temp));
 	temp[maxLength-1] = '\0';
 
-	if (ret == SWKBD_BUTTON_CONFIRM) {
-		return temp;
-	}
-
-	return "";
+	return (ret == SWKBD_BUTTON_CONFIRM ? temp : "");
 }
 
 int Input::setInt(int maxValue, std::string Text) {
@@ -63,13 +59,7 @@ int Input::setInt(int maxValue, std::string Text) {
 	SwkbdButton ret = swkbdInputText(&state, input, sizeof(input));
 	input[3]        = '\0';
 
-	if (ret == SWKBD_BUTTON_CONFIRM) {
-		return (int)std::min(std::stoi(input), maxValue);
-	} else {
-		return -1;
-	}
-
-	return -1;
+	return (ret == SWKBD_BUTTON_CONFIRM ? (int)std::min(std::stoi(input), maxValue) : -1);
 }
 
 std::uint8_t Input::setu8(std::string Text) {
@@ -87,11 +77,5 @@ std::uint8_t Input::setu8(std::string Text) {
 	SwkbdButton ret = swkbdInputText(&state, input, sizeof(input));
 	input[3]        = '\0';
 
-	if (ret == SWKBD_BUTTON_CONFIRM) {
-		return (u8)std::min(std::stoi(input), 255);
-	} else {
-		return -1;
-	}
-
-	return -1;
+	return (ret == SWKBD_BUTTON_CONFIRM ? (u8)std::min(std::stoi(input), 255) : -1);
 }

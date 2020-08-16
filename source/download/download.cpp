@@ -215,7 +215,7 @@ Result downloadToFile(std::string url, std::string path) {
 	}
 
 	fflush(downfile);
-	
+
 exit:
 	if (fsCommitThread) {
 		killThread = true;
@@ -226,7 +226,7 @@ exit:
 	}
 
 	socExit();
-	
+
 	if (socubuf) {
 		free(socubuf);
 	}
